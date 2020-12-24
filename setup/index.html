@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>GNUstep and VSCode - McLaren Synth Kit</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/console.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/objc.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">McLaren Synth Kit</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../intro/" class="nav-link">Introduction</a>
+                            </li>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">GNUstep and VSCode</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Thing <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../one" class="dropdown-item">None</a>
+</li>
+                                    
+<li>
+    <a href="../two" class="dropdown-item">None</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../intro/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#setting-up-your-environment" class="nav-link">Setting up your Environment</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#install-gnustep" class="nav-link">Install GNUstep</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#install-vscode" class="nav-link">Install VSCode</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="setting-up-your-environment">Setting up your Environment</h1>
+<p>This chapter describes how to install some of the things that make a modern Objective-C environment an enjoyable experience on Linux.  We'll go over the following things:</p>
+<ul>
+<li>installing GNUstep</li>
+<li>installing VSCode</li>
+</ul>
+<h2 id="install-gnustep">Install GNUstep</h2>
+<p>The Objective-C programming environment needs its supporting libraries and development headers to be useful and complete.  These are provided by GNUstep. The modern dialect of Objective-C is supported by <code>libobjc2</code> and can make use of <code>libdispatch</code> from Apple for concurrency.</p>
+<p>The easiest way to install and build GNUstep is with scripts in the following repository:</p>
+<ul>
+<li><a href="https://github.com/plaurent/gnustep-build/">https://github.com/plaurent/gnustep-build/</a></li>
+</ul>
+<p>These scripts automate the entire process of first installing the dependencies of the <code>GNUstep</code> environment, downloading the necessary repositories from Github and building everything.</p>
+<p>First, download the build repo.</p>
+<pre><code class="language-console">$ mkdir ~/git
+$ cd ~/git
+$ git clone https://github.com/plaurent/gnustep-build
+</code></pre>
+<p>Then, make a new directory to perform the build in.</p>
+<pre><code class="language-console">$ cd ~
+$ mkdir gbuild
+</code></pre>
+<p>In the directory you just made, run the build command corresponding to your Operating System.</p>
+<pre><code class="language-console">$ cd gbuild
+$ ~/git/gnustep-build/ubuntu-20.10-clang-11.0-runtime-2.0/GNUstep-buildon-ubuntu2010.sh
+</code></pre>
+<p>After about 20 minutes on a fast laptop with a good connection, you'll have a complete <code>GNUstep</code> development environment.  The installation script writes a modification to your <code>.bashrc</code> so that new terminals get the proper environment variables configured.  Open up a new `xterm and see if it's installed.</p>
+<pre><code class="language-console">$ clang -v
+$ gnustep-config --help
+</code></pre>
+<h3 id="a-minimal-objc-program">A Minimal ObjC program</h3>
+<p>If you're new to Objective-C on Linux, try compiling this tiny program to see if everything is working correctly.</p>
+<pre><code class="language-objc">#import &lt;Foundation/Foundation.h&gt;
+#import &lt;dispatch/dispatch.h&gt;
+
+int main(int argc, char *argv[], char **env)
+{
+  NSLog(@&quot;Hello World!\n&quot;);
+
+  NSString *greeting = @&quot;Hello from a dispatch event&quot;;
+
+  dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, 2.0*NSEC_PER_SEC);
+
+  dispatch_after(delay, dispatch_get_global_queue(0,0), ^(void) {
+      NSLog(@&quot;dispatch: %@&quot;, greeting);
+      exit(0);
+    });
+
+
+  [[NSRunLoop mainRunLoop] run];
+}
+</code></pre>
+<p>Then, to compile it use <code>gnustep-config</code> to pick up all of the flags the compiler needs for GNUstep base libraries.  But note, we still have to specify <code>libdispatch</code> explicitly.</p>
+<pre><code class="language-console">$ clang -o objctest1 `gnustep-config --objc-flags` `gnustep-config --base-libs` objctest1.m -ldispatch
+</code></pre>
+<p>This program is available in the <a href="../examples-setup">../examples-setup</a> directory along with a Makefile.</p>
+<h2 id="install-vscode">Install VSCode</h2>
+<p>VSCode (or just <code>code</code> as it is known <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a> has good support for Obj-C out of the box.  But it is when it is combined with <code>clang</code> and <code>clangd</code> it really shines!  With <code>clangd</code>, the compiler is run continuously against your code changes.  You get context-aware completions and the ability to locate functions and variables across files in your workspace.</p>
+<p>To do this well, there is a little bit of configuration that needs to happen in the project to tell the background-compiler how to run.  But we'll describe all of that here a little later.</p>
+<p>But first: install <code>code</code> by downloading from the site.</p>
+<h3 id="avoid-the-snap-version-of-vscode">Avoid the SNAP version of VSCode!</h3>
+<p>On Ubuntu, a Snap is a self-contained installation unit that contains a program and all of its dependencies.  Programs packaged as "snaps" run in their own container, and are granted only the privileges they need to run.  For editing and compiling files, VSCode has enough privileges to perform these tasks.</p>
+<p>For audio development on Linux using VSCode, there is a bit of a problem.  The Snap version of VSCode does not have access to the ALSA audio system.  As a result, it is not possible to run your audio test programs as a sub-process of VSCode.  That means you can't test your code in the terminal inside of VSCode.</p>
+<p>The solution is simple: don't install the Snap version of VSCode.  Instead, download the <code>.deb</code> or <code>.rpm</code> or <code>.tar.gz</code> version.</p>
+<h3 id="open-up-this-workspace">Open up this Workspace</h3>
+<p>VSCode keeps track of a project with certain files.   In the top level of this project, there is a file called <code>mcsynkit.code-workspace</code>.  This defines the files of the workspace.  Select this file to open our project.</p>
+<h3 id="add-the-clangd-extension">Add the CLANGD extension</h3>
+<p>Open up the "Extensions" panel and find the <code>clangd</code> extension and install it.  This will add not only the mode, but the subprocess it needs.</p>
+<p><img alt="setup-pics/vscode-extensions-clangd.png" src="../setup-pics/vscode-extensions-clangd.png" /></p>
+<h3 id="configuring-clangd-with-compile_flagstxt">Configuring CLANGD with compile_flags.txt</h3>
+<p>The <code>clangd</code> extension communicates with a subprocess that is continuously compiling and re-compiling your code as you type or save it.  Out of the box, <code>clangd</code> knows about Objective-C, but doesn't know about <code>GNUstep</code> or how to find all of the headers and compile flags of your project.  For this, there are two methods:</p>
+<ul>
+<li>compile_commands.json</li>
+<li>compile_flags.txt</li>
+</ul>
+<p>The first method, <code>compile_commands.json</code> can be set up with different compilation options for each file in your project.  This is a good option for complex projects, and it has good support with <code>CMakeLists</code>.  But our project is <code>Makefile</code> based.</p>
+<p>We are going to use the second method, a <code>compile_flags.txt</code> file.  When <code>clangd</code> runs to compile a particular file, it looks in the directory of that file and its parents and ancestors for a <code>compile_flags.txt</code> file.  If found, this file is used to set all of the flags for <code>clang</code>.  The format is ONE FLAG per LINE.</p>
+<p>The flags that should be put in the <code>compile_flags.txt</code> file are those produced by the following two commands, as well as any other include directories your project uses</p>
+<ul>
+<li>gnustep-config --objc-flags</li>
+<li>gnustep-config --objc-libs</li>
+</ul>
+<h3 id="generating-compile_flagstxt-with-makefile">Generating compile_flags.txt with Makefile</h3>
+<p>In the root of the workspace there is a Makefile that can generate the configuration file.  Use it like this</p>
+<pre><code class="language-console">$ make compile_flags.txt
+</code></pre>
+<p>This will generate the <code>compile_flags.txt</code> file based on your <code>GNUstep</code> installation and the location of your workfolder.</p>
+<h3 id="try-it-out">Try it out</h3>
+<p>In the <code>examples-ask</code> folder, open up the example program, <code>miniosc.m</code> and hover over a method or variable.  <code>VSCode</code> will show the details of the method.  It is possible to follow references and find definitions now. </p>
+<p><img alt="setup-pics/vscode-objc-hover.png" src="../setup-pics/vscode-objc-hover.png" /></p>
+<p>Try introducing a syntax error into this file and see how <code>VSCode</code> tells you about it.  It will even display a suggestion about how to fix it.</p>
+<p>Look at the screenshot below to see an exmaple of a syntax error and its explanation.</p>
+<p><img alt="setup-pics/vscode-objc-syntax-error.png" src="../setup-pics/vscode-objc-syntax-error.png" /></p>
+<p>All of this goodness is available because of <code>clang</code> and <code>clangd</code> integration.  It's not quite <code>XCode</code>, but it's pretty nice!</p>
+<h3 id="where-vscode-looks-for-configuration-information">Where VSCode looks for configuration information</h3>
+<p><code>VSCode</code> stores configuration information in a couple of different places on Linux.</p>
+<p>Your Global settings are in <code>~/.config/Code/User/settings.json</code>.</p>
+<p>Workspace settings are in the top-level <code>.vscode</code> directory.  The file <code>tasks.json</code> defines useful tasks for compiling and running the demonstration programs in this project.</p>
+<pre><code class="language-console">mcsynkit
+  ├──.vscode
+     ├──tasks.json
+     ├──settings.json
+  ├──compile_flags.txt
+  ├──examples-ask
+    ├──miniosc1.m
+    ├──minisynth1.m
+    ├─...
+  ├──examples-msk
+    ├─scaleplayer.m
+</code></pre>
+<h3 id="try-out-a-build-and-a-test-command">Try out a Build and a Test command</h3>
+<p>First, open up <code>examples-ask/miniosc1.m</code>.  This is little program that plays a tone on the default ALSA device.</p>
+<p>We have set up the project with <strong>B</strong>uild and <strong>T</strong>est commands for the example projects.  Open up the <code>VSCode</code> command palette and find them.</p>
+<p><img alt="setup-pics/vscode-command-palette.png" src="../setup-pics/vscode-command-palette.png" /></p>
+<p>Select the <strong>B</strong>uild command.  You will see some pre-defined targets for the example programs in the list.</p>
+<ul>
+<li>examples-ask: make miniosc1</li>
+<li>examples-ask: make minisynth1</li>
+</ul>
+<p><img alt="setup-pics/vscode-build-command-selection.png" src="../setup-pics/vscode-build-command-selection.png" /></p>
+<p>Select the <code>examples-ask: make miniosc1</code> task.  If all goes well, this will compile your program.  Notice in the screenshot below the compile terminal that opened up.</p>
+<p><img alt="setup-pics/vscode-compile-miniosc1.png" src="../setup-pics/vscode-compile-miniosc1.png" /></p>
+<p>But if there is a bug in your program, <code>VSCode</code> can show you in the list of "Problems."  In this workspace, our <code>tasks.json</code> file has defined the proper problem matchers so that <code>VSCode</code> can understand the error outputs of <code>clang</code>.</p>
+<p>Try it out.  Introduce a syntax error (we're put the wrong parameter <code>stream</code> where <code>pcmname</code> used to be) and try the build command again.  Open up the "Problems" panel and see the list of errors.</p>
+<p><img alt="setup-pics/vscode-compile-miniosc1-problems.png" src="../setup-pics/vscode-compile-miniosc1-problems.png" /></p>
+<p>Now, try out a <strong>T</strong>est command.  The workspace has those as well. Open up the Command Palette and find the Test commands.</p>
+<p><img alt="setup-pics/vscode-build-test-selection.png" src="../setup-pics/vscode-test-command-selection.png" /></p>
+<p>Select the <code>run ask:miniosc1</code> test task.  This will run the program in a subterminal.  If all goes well, you will hear an <strong>A440</strong> in the <strong>default</strong> sound device for two seconds.  The Terminal window shows the output of running the command.</p>
+<p><img alt="setup-pics/vscode-test-command-miniosc1-output.png" src="../setup-pics/vscode-test-command-miniosc1-output.png" /></p>
+<h3 id="summary-of-build-and-test-in-the-workspace">Summary of Build and Test in the Workspace</h3>
+<p>In this Workspace, we have set up an environment for compiling, debugging and testing Objective-C programs.</p>
+<ul>
+<li>gnustep-config returns information about the GNUstep installation</li>
+<li>compile_commands.txt for each sub-directory tells VSCode how to integrate with clangd</li>
+<li>Makefiles are used to define our compilation targets, and to build compile_commands.txt</li>
+<li>tasks.json are used to define Build and Test tasks</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
