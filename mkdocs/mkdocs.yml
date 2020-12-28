@@ -1,0 +1,20 @@
+site_name: McLaren Synth Kit
+nav:
+  - Home: 'index.md'
+  - Introduction: 'intro.md'
+  - GNUstep and VSCode: 'setup.md'
+  - References:
+    - Alsa Sound Kit: 'ask.md'
+    - Mclaren Synth Kit: 'msk.md'
+theme:
+  name: mkdocs
+  highlightjs: true
+  hljs_languages:
+    - console
+    - objc
+    - yaml
+  shortcuts:
+    help: 191     # ?
+    next: 78      # n
+    previous: 80  # p
+    search: 83    # s

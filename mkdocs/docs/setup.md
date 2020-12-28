@@ -107,42 +107,36 @@ Open up the "Extensions" panel and find the `clangd` extension and install it.  
 ![setup-pics/vscode-extensions-clangd.png](./setup-pics/vscode-extensions-clangd.png)
 
 
-### Configuring CLANGD with compile_commands.txt
+### Configuring CLANGD with compile_flags.txt
 
 The `clangd` extension communicates with a subprocess that is continuously compiling and re-compiling your code as you type or save it.  Out of the box, `clangd` knows about Objective-C, but doesn't know about `GNUstep` or how to find all of the headers and compile flags of your project.  For this, there are two methods:
 
 * compile_commands.json
-* compile_commands.txt
+* compile_flags.txt
 
 The first method, `compile_commands.json` can be set up with different compilation options for each file in your project.  This is a good option for complex projects, and it has good support with `CMakeLists`.  But our project is `Makefile` based.
 
-We are going to use the second method, a `compile_commands.txt` file.  When `clangd` runs to compile a particular file, it looks in the directory of that file and its parents for a `compile_commands.txt` file.  If found, this file is used to set all of the flags for `clang`.  The format is ONE FLAG per LINE.
+We are going to use the second method, a `compile_flags.txt` file.  When `clangd` runs to compile a particular file, it looks in the directory of that file and its parents and ancestors for a `compile_flags.txt` file.  If found, this file is used to set all of the flags for `clang`.  The format is ONE FLAG per LINE.
 
-The flags that should be put in the `compile_commands.txt` file are those produced by the following two commands, as well as any other include directories your project uses
+The flags that should be put in the `compile_flags.txt` file are those produced by the following two commands, as well as any other include directories your project uses
 
 * gnustep-config --objc-flags
 * gnustep-config --objc-libs
 
-### Generating compile_commands.txt with Makefile
+### Generating compile_flags.txt with Makefile
 
-In our example directories where there is a Makefile, we have provided a special target.  Use it like this
+In the root of the workspace there is a Makefile that can generate the configuration file.  Use it like this
 
 ``` console
-$ make compile_commands.txt
+$ make compile_flags.txt
 ```
 
-This will generate the `compile_commands.txt` file based on your `GNUstep` installation and the location of your workfolder.
+This will generate the `compile_flags.txt` file based on your `GNUstep` installation and the location of your workfolder.
 
 ### Try it out
 
-Go into the examples directory, `examples-ask` and make `compile_commands.txt` for your installation.
 
-``` console
-$ cd examples-ask
-$ make compile_commands.txt
-```
-
-Now, open up the example program, `miniosc.m` and hover over a method or variable.  `VSCode` will show the details of the method.  It is possible to follow references and find definitions now. 
+In the `examples-ask` folder, open up the example program, `miniosc.m` and hover over a method or variable.  `VSCode` will show the details of the method.  It is possible to follow references and find definitions now. 
 
 ![setup-pics/vscode-objc-hover.png](./setup-pics/vscode-objc-hover.png)
 
@@ -160,22 +154,20 @@ All of this goodness is available because of `clang` and `clangd` integration.  
 
 Your Global settings are in `~/.config/Code/User/settings.json`.
 
-Local setttings can be distributed throughout your project.  In our project we have placed `.vscode` files in each of our examples directories, and we have created `tasks.json` files there for building and running the examples.
+Workspace settings are in the top-level `.vscode` directory.  The file `tasks.json` defines useful tasks for compiling and running the demonstration programs in this project.
 
 ``` console
 mcsynkit
-├──examples-ask
   ├──.vscode
      ├──tasks.json
+     ├──settings.json
   ├──compile_flags.txt
-  ├──miniosc1.m
-  ├──minisynth1.m
-  ├─...
-├──examples-msk
-  ├──.vscode
-    ├──tasks.json
-  ├──compile_flags.txt
-  ├─...
+  ├──examples-ask
+    ├──miniosc1.m
+    ├──minisynth1.m
+    ├─...
+  ├──examples-msk
+    ├─scaleplayer.m
 ```
 
 ### Try out a Build and a Test command
@@ -188,13 +180,13 @@ We have set up the project with **B**uild and **T**est commands for the example 
 
 Select the **B**uild command.  You will see some pre-defined targets for the example programs in the list.
 
-* make ask:miniosc1
-* make ask:minisynth1
+* examples-ask: make miniosc1
+* examples-ask: make minisynth1
 
 
 ![setup-pics/vscode-build-command-selection.png](./setup-pics/vscode-build-command-selection.png)
 
-Select the `make ask:miniosc1` task.  If all goes well, this will compile your program.  Notice in the screenshot below the compile terminal that opened up.
+Select the `examples-ask: make miniosc1` task.  If all goes well, this will compile your program.  Notice in the screenshot below the compile terminal that opened up.
 
 ![setup-pics/vscode-compile-miniosc1.png](./setup-pics/vscode-compile-miniosc1.png)
 
@@ -221,7 +213,7 @@ Select the `run ask:miniosc1` test task.  This will run the program in a subterm
 In this Workspace, we have set up an environment for compiling, debugging and testing Objective-C programs.
 
 * gnustep-config returns information about the GNUstep installation
-* compile_commands.txt for each sub-directory tells VSCode how to integrate with clangd
+* compile_commands.txt in the root of the project tells clangd how to compile files
 * Makefiles are used to define our compilation targets, and to build compile_commands.txt
 * tasks.json are used to define Build and Test tasks
 
