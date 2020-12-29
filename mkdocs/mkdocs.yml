@@ -4,7 +4,8 @@ nav:
   - Introduction: 'intro.md'
   - GNUstep and VSCode: 'setup.md'
   - References:
-    - Alsa Sound Kit: 'ask.md'
+    - Alsa Sound Kit - MIDI: 'ask-midi.md'
+    - Alsa Sound Kit - PCM: 'ask-pcm.md'
     - Mclaren Synth Kit: 'msk.md'
 theme:
   name: mkdocs

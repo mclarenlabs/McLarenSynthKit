@@ -205,7 +205,15 @@ Select the `run ask:miniosc1` test task.  This will run the program in a subterm
 ![setup-pics/vscode-test-command-miniosc1-output.png](./setup-pics/vscode-test-command-miniosc1-output.png)
 
 
+## Setting up your system for MIDI and Sound development
 
+Be sure to install the development headers for `libasound`.
+
+``` console
+$ sudo apt install libasound2-dev
+```
+
+This will install the development headers in `/usr/include/alsa`.
 
 
 ### Summary of Build and Test in the Workspace
