@@ -4,7 +4,7 @@ The Alsa Sound Kit (ASK) provides Objective-C wrappers around ALSA MIDI devices 
 
 A dependency graph is shown below.
 
-![MSK on top of ASK on top of LIBASOUND](fig.png)
+![MSK on top of ASK on top of LIBASOUND](ask-midi-figs01/ask-midi-figs01.001.png)
 
 The purpose of the Alsa Sound Kit is to make it easier to use ALSA MIDI and Sound devices by doing more than wrapping the C-level ALSA functions.  The Alsa Sound Kit provides subroutines for enumerating the devices in your system and for monitoring their status.  The Alsa Sound Kit relieves you (the programmer) from managing threads.  Instead, you set up your program to respond to MIDI events on a dispatch queue, or to respond to Audio events in a block.
 
@@ -14,7 +14,7 @@ ALSA can expose MIDI devices as either "Sequencer" objects or "Raw MIDI" objects
 
 Sequencer objects are a more abstract representation of the MIDI system.  At the Sequencer level, the MIDI system consists of a collection of "clients".  A "client" has one or more "ports".  Interconnections between "ports" are made to describe a MIDI processing graph.
 
-![ASK clients and ports](clients.png)
+![ASK clients and ports](ask-midi-figs01/ask-midi-figs01.002.png)
 
 On Linux, the `aconnect` commands can help you about the connections between your MIDI Sequencer clients.  To list the clients on your system try the command below.
 

@@ -1,12 +1,12 @@
 # Alsa Sound Kit - PCM
 
-The Alsa Sound Kit (ASK) provides ObjectiveC wrappers around ALSA MIDI devices and ALSA PCM (sound) devices.  This chapter describes how sound devices are configured and how sounds are played or captured. 
+The Alsa Sound Kit (ASK) provides Objective-C wrappers around ALSA MIDI devices and ALSA PCM (sound) devices.  This chapter describes how sound devices are configured and how sounds are played or captured. 
 
 ## ALSA PCM System Overview
 
 The Advance Linux Sound Architecture (ALSA) library calls a device that can translate continuous sound waves into a series of samples a "PCM" (PCM stands for Pulse Code Modulation).  ALSA PCM devices can PLAY and CAPTURE sounds.
 
-In your system, a sound capability is provided by a "card."  These days, a sound card is usually integrated directly into your laptop.  When you plug a USB audio device into your system, that will appear as a card too.  A card can have one or more devices.  Some of the devices can play or capture audio, and there can be devices for MIDI or other functions too.  For our purposes here, we'll be focusing just on the devices that play or capture audio.
+In your system, a sound capability is provided by a "card."  These days, a sound card is usually integrated directly into your laptop motherboard.  When you plug a USB audio device into your system, that will appear as a card too.  A card can have one or more devices.  Some of the devices can play or capture audio, and there can be devices for MIDI or other functions too.  For our purposes here, we'll be focusing just on the devices that play or capture audio.
 
 On a Linux computer, you can list sound devices using the `aplay` command.  This command can also play audio samples.  Try it out like this.
 
@@ -45,7 +45,7 @@ card 1: PCH [HDA Intel PCH], device 1: CS4208 Digital [CS4208 Digital]
   Subdevice #0: subdevice #0
 ```
 
-We can see that there are two "cards" in the system.  Card 0 is dedicated to HDMI output, and Card 1 provides audio output to the speakers and headphones of the laptop and can capture from the microphone.
+We can see that there are two "cards" in the system.  Card 0 is dedicated to HDMI output.  Card 1 provides audio output to the speakers and headphones of the laptop and can capture from the microphone.
 
 > Aside: In ALSA, a hardware card/device combo is referred to with name in a special format.
 > 
@@ -101,7 +101,7 @@ Our system alsa has a pseudo-device for "pulse" - the "Pulse Sound Server".
 
 Pulse and JACK are both audio sound servers.  Each of these "takes over" a hardware device and provides a virtual interface for application programs to use.
 
-JACK is used in high-performance audio environments and provides an "audio-bus" abstraction for sharing low-latency audio streams between applications.  JACK is not configured by default on many Linux systems, but is easy to install.  Programs that make the optimal use of JACK use the JACK API directly rather than ALSA.
+JACK is used in high-performance audio environments and provides an "audio-bus" abstraction for sharing low-latency audio streams between applications.  JACK is not configured by default on many Linux systems, but is easy to install.  Programs that make the optimal use of JACK use the JACK API directly rather than ALSA.  (Note: JACK can also provide access via an ALSA Virtual PCM.)
 
 Pulse is used on the desktop to multiplex the one selected hardware audio device between all of the applications on the desktop.  ALSA applications that open the "default" or "pulse" audio device on a Pulse-enabled system actually open a port to the Pulse sound server, which then mixes its sound output with other applications that are producing sounds at the same time.
 
@@ -127,11 +127,10 @@ An `ASKPcm` object is the Alsa Sound Kit wrapper for an ALSA Pcm handle.  The `A
 
 This section will describe how to open and configure an audio device, and how to play a sound.
 
-> Note: it is possible to open multiple audio devices at the same time and play sound on each of them.
 
 ### Open a PCM
 
-The initializer for an `ASKPcm` opens the named ALSA device for playback or capture.  The "device name" should be specified.
+The initializer for an `ASKPcm` opens the named ALSA device for playback or capture.  The ALSA "device name" should be specified.
 
 ``` objc
   NSError *error;
@@ -149,14 +148,21 @@ Once a PCM is opened, it must be configured for use.  This involves setting two 
 
 The Hardware Parameters necessary include the sample rate, the number of channels (stereo or mono), the memory layout of the samples (interleaved or noninterleaved) and the format (16-bit unsigned integer, 32-bit signed, float, etc) of the samples.  It is also necessary to set the period size and number of periods, or equivalently the total buffer size and number of periods.
 
-> Aside: What is the period size?
->
-> The period size is the number of samples transferred to an audio device as a unit.  
-> A user program needs to be able to write new samples to a memory area different than that
-> being transferred, so there must be at least room for *at least* two periods worth of samples in the buffer.
-> But in some applications it may be useful to size the buffer large enough to hold three or four periods of samples.
-> These parameters are the "period size" and "number of periods."  The total "buffer size" equals the "period size"
-> multiplied by the "number of periods."
+### What is the period size?
+
+The period size is the number of samples transferred to an audio device as a unit.   A user program needs to be able to write new samples to a memory area different than that
+being transferred, so there must be at least room for *at least* two periods worth of samples in the buffer. But in some applications it may be useful to size the buffer large enough to hold three or four periods of samples. These parameters are the "period size" and "number of periods."  The total "buffer size" equals the "period size" multiplied by the "number of periods."
+
+![Samples, Periods and Buffer](ask-pcm-figs01/ask-pcm-figs01.001.png)
+
+
+### How Readers and Writers share the Audio Buffer
+
+Whether your PCM device is a PLAYBACK or a CAPTURE device, there is a circular buffer between your code and the hardware.  In the case of PLAYBACK, your audio thread is writing samples to the buffer, and the hardware device is reading samples from the buffer.  The figure below illustrates the relationship.
+
+![Samples, Periods and Buffer](ask-pcm-figs01/ask-pcm-figs01.002.png)
+
+The choice of hardware parameters and your algorithm design must all cooperate for this to work smoothly.  If the software cannot produce new samples at the rate the hardware is consuming them, then a condition known as an "underrun" occurs.   If the software is designed to efficiently produce large chunks of audio, this may reduce the occurrence of underruns, but it can increase the total latency of the system.  Balancing the parameters with the algorithm design of your software is an art in itself.
 
 ### Set the Hardware Parameters
 
@@ -191,7 +197,7 @@ This device supports the following Hardware Parameters ranges:
 * an Interleaved memory access pattern
 * and signed 16-bit or 32-bit little endian integers
 
-That's a lot of information!  And it turns out that many combinations of values allowed by the ranges do not necessarily work.  Very tiny periods stress the CPU beyond what it can deliver.  Period sizes that are too large limit the total number of periods.
+That's a lot of information!  And it turns out that many combinations of values allowed by the ranges do not necessarily work.  Very tiny periods stress the CPU beyond what it can deliver.  (Note: if experimenting with your computer, trying a very low period size may hang your system!)  Period sizes that are too large limit the total number of periods.
 
 In any event, one by one, we must set all of these parameters to something allowed.  For instance, we might set the sample rate first to 44100.  
 
@@ -268,7 +274,7 @@ The `ASKPcmSwParams` object can be inspected too.  It looks like this for the de
 
 ## Set the Callbacks
 
-An `ASKPcm` manages the audio thread and collects samples for playing (or capturing) through callback blocks.  For a playback PCM, the block is defined with the `onPlayback:` method.  The block specified must produce one periods worth of frames each time it is called (the parameter `nframes` will be the period size).
+An `ASKPcm` manages the audio thread and collects samples for playing (or capturing) through callback blocks.  For a playback PCM, the block is defined with the `onPlayback:` method.  The block specified must produce one period's worth of frames each time it is called (the parameter `nframes` will be the period size).
 
 ``` objc
 [pcm onPlayback:^(snd_pcm_sframes_t nframes) {
@@ -278,7 +284,7 @@ An `ASKPcm` manages the audio thread and collects samples for playing (or captur
 
 The block must return the samples of the period as a `void*`.  The samples must match the "format" and "access" specified when setting the Hardware parameters.
 
-After the samples are written to the PCM, a second block is called.
+After the samples are written to the PCM, a second block is called.  This block can be used by user-code for maintenance operations.
 
 ``` objc
 [pcm onPlaybackCleanup:^{
@@ -295,6 +301,8 @@ There is also a callback block that can receive an error.  The value passed to t
 }];
 ```
 
+### Capture Callbacks
+
 For a capture PCM, there are two callbacks.  The first must return a pointer to a memory area big enough to hold a periods worth of samples.  The second is called after the samples have been written there.
 
 ``` objc
@@ -305,6 +313,15 @@ For a capture PCM, there are two callbacks.  The first must return a pointer to 
 [pcm onCapture:^(snd_pcm_sframes_t nframes) {
   // ... handle the frames written to *wav
 }]
+```
+
+There is also a callback block that can receive an error.  The value passed to the block is the ALSA error code.
+
+``` objc
+[pcm onCaptureThreadError:^(int err) {
+  NSLog(@"Got Thread Error:%d", err);
+  exit(1);
+}];
 ```
 
 ### An example oscilator: A440
@@ -376,7 +393,7 @@ if (ok == NO) {
 
 If there is no error, the audio thread will play until stopped.
 
-## An Example Oscillator
+## Experiment with ALSA Devices
 
 The example program `examples-ask/miniosc1.m` is a small program that shows all of the steps necessary to open a PCM device and play a tone. 
 

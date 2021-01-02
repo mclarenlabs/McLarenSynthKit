@@ -216,9 +216,9 @@ $ sudo apt install libasound2-dev
 This will install the development headers in `/usr/include/alsa`.
 
 
-### Summary of Build and Test in the Workspace
+## Summary 
 
-In this Workspace, we have set up an environment for compiling, debugging and testing Objective-C programs.
+In this chapter we described the workspace for Audio system development using VSCode.  It is an environment for compiling, debugging and testing Objective-C programs.
 
 * gnustep-config returns information about the GNUstep installation
 * compile_commands.txt in the root of the project tells clangd how to compile files

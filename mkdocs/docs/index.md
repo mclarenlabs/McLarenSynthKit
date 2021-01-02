@@ -11,7 +11,7 @@ FYI: These are the same libraries McLaren Labs uses to construct the synthesizer
 
 ## Background
 
-This project is partially inspired by experiences with audio systems on IOS, OSX and Webkit.  We had in mind building a networked synthesizer using RTP-MIDI in an embedded Raspberry Pi application.  We really liked the features of modern Objective-C and thought it could provide a nice experience for audio programming.
+This project is partially inspired by experiences with audio systems on IOS, OSX and Webkit and a NeXT project called [MusicKit](https://github.com/leighsmith/MusicKit).  We had in mind building a networked synthesizer using RTP-MIDI in an embedded Raspberry Pi application.  We really liked the features of modern Objective-C and thought it could provide a nice experience for audio programming.
 
 We purposely chose to focus on Linux and its ALSA interface.  We wanted to avoid the layers of abstraction provided by the PortAudio project or JUCE. We also wanted to avoid dependence on a sound server like Pulse or JACK simply to reduce dependencies.  We wanted to keep the toolkit lean and easy to set up.
 

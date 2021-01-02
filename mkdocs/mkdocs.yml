@@ -1,12 +1,11 @@
 site_name: McLaren Synth Kit
 nav:
-  - Home: 'index.md'
-  - Introduction: 'intro.md'
+  - Introduction: 'index.md'
   - GNUstep and VSCode: 'setup.md'
-  - References:
+  - Chapters:
     - Alsa Sound Kit - MIDI: 'ask-midi.md'
     - Alsa Sound Kit - PCM: 'ask-pcm.md'
-    - Mclaren Synth Kit: 'msk.md'
+    - Mclaren Synth Kit - Overview: 'msk-over.md'
 theme:
   name: mkdocs
   highlightjs: true
