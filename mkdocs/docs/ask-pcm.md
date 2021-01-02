@@ -307,6 +307,40 @@ For a capture PCM, there are two callbacks.  The first must return a pointer to 
 }]
 ```
 
+### An example oscilator: A440
+
+The example program in `examples-ask/miniosc1.m` sets up a PCM and plays a SINE-wave note: an A440.  The code setting up the sample buffer and filling it with samples is shown below.  There are some interesting things coded here that point to some of the tedium of working with PCM devices: many of the obtained hardware parameters place requirements on the C code written.
+
+* the frequency increment (`dphi`) is a function of sample rate
+* the size of the data buffer is dependent not only on period size, but sample format (`int32_t`)
+* the access pattern (interleaved) is reflected in the loop
+
+``` objc
+// Create a waveform: A440
+__block double phi = 0;
+
+double dphi = (2 * M_PI) * 440.0 / 22050.0;
+NSData *data = [NSMutableData dataWithLength:(2 * persize * sizeof(int32_t))];
+int32_t *wav = (int32_t*) [data bytes];
+
+// Install callback
+[pcm onPlayback:^(snd_pcm_sframes_t nframes) {
+  for (int i = 0; i < 1024; i++) {
+    double sound = sin(phi) * (1 << 24);
+    wav[i*2] = sound;
+    wav[i*2 + 1] = sound;
+    phi += dphi;
+    if (phi >= 2*M_PI) {
+        phi -= 2*M_PI;
+    }
+  }
+  return (void*) wav;
+}];
+
+```
+
+The use of the block as a callback lends some conveniences however. The variables and memory buffer used inside the block are "captured" by the compiler.  Without blocks, an equivalent callback function would need more arguments.  Blocks make the callback from the audio thread easier to write.
+
 ### Rules on the Callback Blocks
 
 The `ASKPcm` sets up and runs the audio thread.  The callback blocks execute in the context of the audio thread.  You must be very careful about what operations your code performs in these blocks.
@@ -361,7 +395,7 @@ You may find that some devices are silent, or that the parameters do not configu
 The Alsa Sound Kit provides the `ASKPcmList` utlity class for listing the PCMs in your system.
 
 ``` objc
-AskPcmList *list = [[ASKPcmList alloc] initWithStream:SND_PCM_STREAM_PLAYBACK];
+ASKPcmList *list = [[ASKPcmList alloc] initWithStream:SND_PCM_STREAM_PLAYBACK];
 for (ASKPcmListItem *item in list.pcmitems) {
     NSLog(@"device-name:%@ display-name:%@", 
       item.pcmDeviceName,
@@ -369,6 +403,21 @@ for (ASKPcmListItem *item in list.pcmitems) {
 }
 ```
 
+On our system, this produces the following output.
+
+``` console
+2020-12-30 09:17:32.146 askpcmlist[112073:112073] device-name:hw:0,3 display-name:HDMI 0
+2020-12-30 09:17:32.146 askpcmlist[112073:112073] device-name:hw:0,7 display-name:HDMI 1
+2020-12-30 09:17:32.146 askpcmlist[112073:112073] device-name:hw:0,8 display-name:HDMI 2
+2020-12-30 09:17:32.146 askpcmlist[112073:112073] device-name:hw:0,9 display-name:HDMI 3
+2020-12-30 09:17:32.146 askpcmlist[112073:112073] device-name:hw:0,10 display-name:HDMI 4
+2020-12-30 09:17:32.146 askpcmlist[112073:112073] device-name:hw:1,0 display-name:CS4208 Analog
+2020-12-30 09:17:32.146 askpcmlist[112073:112073] device-name:hw:1,1 display-name:CS4208 Digital
+2020-12-30 09:17:32.146 askpcmlist[112073:112073] device-name:hw:3,0 display-name:USB Audio
+2020-12-30 09:17:32.146 askpcmlist[112073:112073] device-name:default display-name:default
+2020-12-30 09:17:32.146 askpcmlist[112073:112073] device-name:null display-name:null
+2020-12-30 09:17:32.146 askpcmlist[112073:112073] device-name:pulse display-name:pulse
+```
 
 ## Summary
 
