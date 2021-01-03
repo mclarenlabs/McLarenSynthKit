@@ -6,6 +6,7 @@ nav:
     - Alsa Sound Kit - MIDI: 'ask-midi.md'
     - Alsa Sound Kit - PCM: 'ask-pcm.md'
     - Mclaren Synth Kit - Overview: 'msk-over.md'
+    - Conclusion: 'conclusion.md'
 theme:
   name: mkdocs
   highlightjs: true
