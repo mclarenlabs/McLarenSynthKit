@@ -75,7 +75,7 @@ It is useful to think about the audio graph constructed by the preceding code.  
 
 A Voice is rendered by a Context until it is no longer active.  (We'll define how Voices become "inactive" in a minute.)
 
-![Context with reference to Voice](msk-over-pics/McSynthKit01.004.png)
+![Context with reference to Voice](msk-over-figs01/msk-over-figs01.004.png)
 
 ## Voices and Automatic Reference Counting (ARC)
 
@@ -93,11 +93,11 @@ v1 = nil;
 
 The Context still holds a reference to the Voice, however. As long as it is "active" the reference is retained.
 
-![Context with only reference to Voice](msk-over-pics/McSynthKit01.005.png)
+![Context with only reference to Voice](msk-over-figs01/msk-over-figs01.005.png)
 
 Now, let's imagine that the Voice becomes marked "inactive".  At some point after the Voice becomes inactive, the Context will drop its reference and will stop rendering the Voice.  The reference count of the Voice will drop to zero, and ARC will reclaim the memory for the voice.
 
-![Context as Voice is reclaimed](msk-over-pics/McSynthKit01.006.png)
+![Context as Voice is reclaimed](msk-over-figs01/msk-over-figs01.006.png)
 
 
 
@@ -122,7 +122,7 @@ Voices are designed to read values from models on each period of the audio threa
 
 Models know how to save themselves to the `NSDefaults` system, and how to restore themselves as well.
 
-![Voice and Model](msk-over-pics/McSynthKit01.007.png)
+![Voice and Model](msk-over-figs01/msk-over-figs01.007.png)
 
 
 ## An Example
@@ -166,7 +166,7 @@ At this point, the system looks like the following figure.  Variables `env1` and
 
 The Context looks to the Oscillator to produce new samples.  The Oscillator, in turn, looks to the Envelope to produce new samples.  The graph tracing from the Context to the Voices and Models defines the audio being rendered by the audio thread.
 
-![SIN oscillator an Linear Envelope](msk-over-pics/McSynthKit01.008.png)
+![SIN oscillator an Linear Envelope](msk-over-figs01/msk-over-figs01.008.png)
 
 ## noteOff and Decay
 
@@ -198,7 +198,7 @@ osc1 = nil;
 
 The resulting graph would be as shown below.  The Context would still hold a reference to the Oscillator, and the Oscillator is still holding a reference to the Envelope.  The Envelope, however, has begun its release.
 
-![SIN oscillator an Linear Envelope](msk-over-pics/McSynthKit01.009.png)
+![SIN oscillator an Linear Envelope](msk-over-figs01/msk-over-figs01.009.png)
 
 At the end of the release period, the envelope will mark itself "inactive" and then the oscillator will too.  The Context will then release its reference to the oscillator and the entire graph will be reclaimed.
 
@@ -219,7 +219,7 @@ osc1.model = oscmodel1;
 osc1 = nil;
 ```
 
-![Two Notes - first Note](msk-over-pics/McSynthKit01.010.png)
+![Two Notes - first Note](msk-over-figs01/msk-over-figs01.010.png)
 
 Some time after the first note, a second note is started by executing the following.  We pass the oscillator to the context and hold a reference to the envelope.
 
@@ -238,7 +238,7 @@ osc2 = nil;
 
 At this point, the Context is playing two notes: each is defined by a subgraph referenced by a pointer.  The Voices of the notes are separate, but they do share Models.  In this way, the two notes are using the same realtime parameters.
 
-![Two Notes - second Note arrives](msk-over-pics/McSynthKit01.011.png)
+![Two Notes - second Note arrives](msk-over-figs01/msk-over-figs01.011.png)
 
 Now, assume that it is time to release the first note.  We do that by sending the `noteOff` message to its envelope.  Since we don't need a reference to the envelope anymore, we set `env1` to `nil`, and at this point the only reference to the subgraph of the first note is being held by the Context.
 
@@ -247,10 +247,37 @@ Now, assume that it is time to release the first note.  We do that by sending th
 env1 = nil;
 ```
 
-![Two Notes - first note releases](msk-over-pics/McSynthKit01.012.png)
+![Two Notes - first note releases](msk-over-figs01/msk-over-figs01.012.png)
 
 After the release time of the first note, the Envelope of the first note is marked "inactive" and it stops producing samples.  Since the oscillator of the first note depends on the envelope, it too, is marked inactive.
 
 The Context drops the reference to the subgraph of the first note, and those Voices are reclaimed.
 
-![Two Notes - first note reclaimed](msk-over-pics/McSynthKit01.013.png)
+![Two Notes - first note reclaimed](msk-over-figs01/msk-over-figs01.013.png)
+
+
+## Complex Note with Two Oscillators
+
+For our last example, we will describe a complex note built with one oscillator that modulates another.  An `MSKPhaseDistortionOscillator` has an additional input that modulates the phase of each sample.  This input may be any kind of Voice.
+
+In the example shown below there are two envelope generators that share the same model.  In this way, these two envelopes will always share the same configuration parameters.  The first envelope generator is a Linear Envelope generator and it sets the gain of the simple SIN-wave oscillator.  The output of this entire first stage, rather than being rendered through the Context, is set as the input to the `sPhaseDistortion` input of a second oscillator.  This second oscillator has its own envelope generator, but it is an Exponential Envelope generator.  The output of the phase distortion oscillator is attached to the Context, so this is the sound that is rendered.
+
+![Complex Note with Two Oscillators](msk-over-figs01/msk-over-figs01.014.png)
+
+This configuration shows an interesting situation: in order to instruct both envelope generators to begin their release, our code needs to hold pointers to both of the envelopes so that it can send the `noteOff` method.
+
+``` objc
+[env1 noteOff];
+[env2 noteOff];
+env1 = nil;
+env2 = nil;
+```
+
+As before, once the envelope has completed its release phase, it is marked "inactive" and the oscillator depending on it is marked "inactive" as well.  Then the Context releases its reference to the subgraph and the objects are reclaimed.
+
+
+## Summary
+
+This chapter provided an overview of the McLaren Synth Kit focusing on its two major classes: the `MSKContext` and the `MSKVoice`.  A Context renders sounds by traversing a subgraph of Voices, each of which is a sample buffer with attached sound generator functions.
+
+The Context and the Voices cooperate to implement memory management and reclamation of Voices through a simple protocol that hides the details of how ARC is performed outside of the audio thread.    This eliminates one source of error an audio program might create that could introduce audio artifacts.  Sound design then becomes the construction of a graph and its traversal.
