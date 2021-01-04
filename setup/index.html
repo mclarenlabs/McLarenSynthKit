@@ -37,24 +37,29 @@
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
                             <li class="navitem">
-                                <a href=".." class="nav-link">Home</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="../intro/" class="nav-link">Introduction</a>
+                                <a href=".." class="nav-link">Introduction</a>
                             </li>
                             <li class="navitem active">
                                 <a href="./" class="nav-link">GNUstep and VSCode</a>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Thing <b class="caret"></b></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Chapters <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="../one" class="dropdown-item">None</a>
+    <a href="../ask-midi/" class="dropdown-item">Alsa Sound Kit - MIDI</a>
 </li>
                                     
 <li>
-    <a href="../two" class="dropdown-item">None</a>
+    <a href="../ask-pcm/" class="dropdown-item">Alsa Sound Kit - PCM</a>
+</li>
+                                    
+<li>
+    <a href="../msk-over/" class="dropdown-item">Mclaren Synth Kit - Overview</a>
+</li>
+                                    
+<li>
+    <a href="../conclusion/" class="dropdown-item">Conclusion</a>
 </li>
                                 </ul>
                             </li>
@@ -67,12 +72,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../intro/" class="nav-link">
+                                <a rel="prev" href=".." class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
+                                <a rel="next" href="../ask-midi/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -101,6 +106,14 @@
               </ul>
             </li>
             <li class="nav-item" data-level="2"><a href="#install-vscode" class="nav-link">Install VSCode</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#setting-up-your-system-for-midi-and-sound-development" class="nav-link">Setting up your system for MIDI and Sound development</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#summary" class="nav-link">Summary</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -240,11 +253,16 @@ int main(int argc, char *argv[], char **env)
 <p><img alt="setup-pics/vscode-build-test-selection.png" src="../setup-pics/vscode-test-command-selection.png" /></p>
 <p>Select the <code>run ask:miniosc1</code> test task.  This will run the program in a subterminal.  If all goes well, you will hear an <strong>A440</strong> in the <strong>default</strong> sound device for two seconds.  The Terminal window shows the output of running the command.</p>
 <p><img alt="setup-pics/vscode-test-command-miniosc1-output.png" src="../setup-pics/vscode-test-command-miniosc1-output.png" /></p>
-<h3 id="summary-of-build-and-test-in-the-workspace">Summary of Build and Test in the Workspace</h3>
-<p>In this Workspace, we have set up an environment for compiling, debugging and testing Objective-C programs.</p>
+<h2 id="setting-up-your-system-for-midi-and-sound-development">Setting up your system for MIDI and Sound development</h2>
+<p>Be sure to install the development headers for <code>libasound</code>.</p>
+<pre><code class="language-console">$ sudo apt install libasound2-dev
+</code></pre>
+<p>This will install the development headers in <code>/usr/include/alsa</code>.</p>
+<h2 id="summary">Summary</h2>
+<p>In this chapter we described the workspace for Audio system development using VSCode.  It is an environment for compiling, debugging and testing Objective-C programs.</p>
 <ul>
 <li>gnustep-config returns information about the GNUstep installation</li>
-<li>compile_commands.txt for each sub-directory tells VSCode how to integrate with clangd</li>
+<li>compile_commands.txt in the root of the project tells clangd how to compile files</li>
 <li>Makefiles are used to define our compilation targets, and to build compile_commands.txt</li>
 <li>tasks.json are used to define Build and Test tasks</li>
 </ul></div>
