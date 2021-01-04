@@ -2,7 +2,7 @@
 
 Project Page Here:
 
-* https://mclarenlabs.github.io/McLarenSynthKit
+* https://mclarenlabs.github.io/McLarenSynthKit/
 
 
 ## Introduction
