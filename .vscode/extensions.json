@@ -1,0 +1,4 @@
+// recommended extensions for this project
+"recommendations" : [
+    "llvm-vs-code-extensions.vscode-clangd"
+]

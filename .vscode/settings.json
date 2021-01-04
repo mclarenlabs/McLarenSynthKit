@@ -1,0 +1,9 @@
+//
+// Settings to make this project more pleasant
+//
+{
+    "files.exclude": {
+	"**/*~": true,		// ignore emacs temp files
+	"**/*.d": true,		// ignore compiler-generated dependency files
+    }
+}

@@ -1,0 +1,328 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    // problem matcher for clang compiler output
+    "problemMatcher": {
+        "owner": "clang",
+        "fileLocation": [
+            "autoDetect",
+            "${workspaceFolder}"
+        ],
+        "pattern": {
+            "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 5
+        }
+    },
+    "tasks": [
+        {
+            "label": "GLOBAL: make compile_flags.txt",
+            "type": "shell",
+            "command": "make compile_flags.txt"
+        },
+        //
+        // examples-ask tasks
+        //
+        {
+            "label": "examples-ask: make askseqdump",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "askseqdump"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/examples-ask"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+        },
+        {
+            "label": "examples-ask: make askseqlist",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "askseqlist"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/examples-ask"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+        },
+        {
+            "label": "examples-ask: make askpcmlist",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "askpcmlist"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/examples-ask"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+        },
+        {
+            "label": "examples-ask: make miniosc1",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "miniosc1"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/examples-ask"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+        },
+        {
+            "label": "examples-ask: make minisynth1",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "minisynth1"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/examples-ask"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+        },
+        {
+            "label": "examples-ask: run askseqdump",
+            "type": "shell",
+            "command": "./askseqdump",
+            "args": [
+                "default"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/examples-ask"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": [],
+        },
+        {
+            "label": "examples-ask: run askseqlist",
+            "type": "shell",
+            "command": "./askseqlist",
+            "args": [
+                "default"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/examples-ask"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": [],
+        },
+        {
+            "label": "examples-ask: run askpcmlist",
+            "type": "shell",
+            "command": "./askpcmlist",
+            "args": [
+                "default"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/examples-ask"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": [],
+        },
+        {
+            "label": "examples-ask: run miniosc1",
+            "type": "shell",
+            "command": "./miniosc1",
+            "args": [
+                "default"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/examples-ask"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": [],
+        },
+        {
+            "label": "examples-ask: run minisynth1",
+            "type": "shell",
+            "command": "./minisynth1",
+            "args": [
+                "default",
+                "24:0"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/examples-ask"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": [],
+        }
+        //
+        // examples-msk tasks
+        //
+        {
+            "label": "examples-msk: make scaleplayer",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "scaleplayer"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/examples-msk"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+        },
+        {
+            "label": "examples-msk: run scaleplayer",
+            "type": "shell",
+            "command": "./scaleplayer",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceRoot}/examples-msk"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": [],
+        },
+        {
+            "label": "examples-msk: make tiny",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "tiny"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/examples-msk"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+        },
+        {
+            "label": "examples-msk: run tiny",
+            "type": "shell",
+            "command": "./tiny",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceRoot}/examples-msk"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": [],
+        },
+        //
+        // examples-setup tasks
+        //
+        {
+            "label": "examples-setup: make objctest1",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "objctest1"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/examples-setup"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+        },
+        {
+            "label": "examples-setup: run objctest1",
+            "type": "shell",
+            "command": "./objctest1",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceRoot}/examples-setup"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": [],
+        }
+    ]
+}
