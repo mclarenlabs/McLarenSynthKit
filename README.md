@@ -11,9 +11,9 @@ The McLaren Synth Kit is a project and a library.  The project you see here cont
 
 McLaren Synth Kit provides Objective-C interfaces to the ALSA (Advanced Linux Sound Architecture) MIDI and Sound devices on Linux computers.  McLaren Synth Kit works with GNUstep and [libdispatch](https://github.com/apple/swift-corelibs-libdispatch) for a thoroughly modern, multicore experience.
 
-* [./examples-setup](./examples-setup) - example programs
 * [./examples-ask](./examples-ask) - example programs using the Alsa Sound Kit
 * [./examples-msk](./examples-msk) - example programs using the McLaren Synth Kit
+* [./examples-setup](./examples-setup) - example programs testing ObjC installation
 
 Header files and libraries.
 

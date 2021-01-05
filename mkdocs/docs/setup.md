@@ -82,7 +82,7 @@ This program is available in the [../examples-setup](../examples-setup) director
 
 ## Install VSCode
 
-VSCode (or just `code` as it is known [https://code.visualstudio.com/](https://code.visualstudio.com/) has good support for Obj-C out of the box.  But it is when it is combined with `clang` and `clangd` it really shines!  With `clangd`, the compiler is run continuously against your code changes.  You get context-aware completions and the ability to locate functions and variables across files in your workspace.
+VSCode (or just `code` as it is known [https://code.visualstudio.com/](https://code.visualstudio.com/)) has good support for Obj-C out of the box.  But it is when it is combined with `clang` and `clangd` that it really shines!  With `clangd`, the compiler is run continuously against your code changes.  You get context-aware completions and the ability to locate functions and variables across files in your workspace.
 
 To do this well, there is a little bit of configuration that needs to happen in the project to tell the background-compiler how to run.  But we'll describe all of that here a little later.
 
