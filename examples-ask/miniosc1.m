@@ -156,7 +156,7 @@ int main(int argc, char *argv[])
     });
 
   // Run forever
-  [[NSRunLoop currentRunLoop] run];
+  [[NSRunLoop mainRunLoop] run];
   
 }
 
