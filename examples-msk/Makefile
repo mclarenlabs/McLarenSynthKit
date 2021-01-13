@@ -5,6 +5,7 @@ OBJCLIBS = $(shell gnustep-config --base-libs)
 
 INCPATH=$(shell pwd)/../include
 LIBPATH=$(shell pwd)/../lib/ubuntu-20.04-clang-10.0-runtime-2.0
+# LIBPATH=$(shell pwd)/../lib/raspbian-10-clang-7.0-runtime-1.9-ARM
 
 # scale player
 scaleplayer: scaleplayer.m
