@@ -96,9 +96,6 @@ For audio development on Linux using VSCode, there is a bit of a problem.  The S
 
 The solution is simple: don't install the Snap version of VSCode.  Instead, download the `.deb` or `.rpm` or `.tar.gz` version.
 
-### Open up this Workspace
-
-VSCode keeps track of a project with certain files.   In the top level of this project, there is a file called `mcsynkit.code-workspace`.  This defines the files of the workspace.  Select this file to open our project.
 
 ### Add the CLANGD extension
 
