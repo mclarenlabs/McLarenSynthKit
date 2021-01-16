@@ -4,18 +4,18 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="None">
         
         
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>McLaren Synth Kit</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Introduction to the Mclaren Synth Kit - McLaren Synth Kit</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
 
-        <script src="js/jquery-1.10.2.min.js" defer></script>
-        <script src="js/bootstrap.min.js" defer></script>
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/console.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/objc.min.js"></script>
@@ -32,10 +32,10 @@
         </script> 
     </head>
 
-    <body class="homepage">
+    <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">McLaren Synth Kit</a>
+                <a class="navbar-brand" href="..">McLaren Synth Kit</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
@@ -45,30 +45,30 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li class="navitem active">
-                                <a href="." class="nav-link">Introduction</a>
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Introduction</a>
                             </li>
                             <li class="navitem">
-                                <a href="setup/" class="nav-link">GNUstep and VSCode</a>
+                                <a href="../setup/" class="nav-link">GNUstep and VSCode</a>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Chapters <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="ask-midi/" class="dropdown-item">Alsa Sound Kit - MIDI</a>
+    <a href="../ask-midi/" class="dropdown-item">Alsa Sound Kit - MIDI</a>
 </li>
                                     
 <li>
-    <a href="ask-pcm/" class="dropdown-item">Alsa Sound Kit - PCM</a>
+    <a href="../ask-pcm/" class="dropdown-item">Alsa Sound Kit - PCM</a>
 </li>
                                     
 <li>
-    <a href="msk-over/" class="dropdown-item">Mclaren Synth Kit - Overview</a>
+    <a href="../msk-over/" class="dropdown-item">Mclaren Synth Kit - Overview</a>
 </li>
                                     
 <li>
-    <a href="conclusion/" class="dropdown-item">Conclusion</a>
+    <a href="../conclusion/" class="dropdown-item">Conclusion</a>
 </li>
                                 </ul>
                             </li>
@@ -80,16 +80,6 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
-                            <li class="nav-item">
-                                <a rel="prev" class="nav-link disabled">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" href="setup/" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
                     </ul>
                 </div>
             </div>
@@ -167,8 +157,8 @@
 <p>One of the design goals of the McLaren Synth Kit it to elevate audio programming to the realm of dispatch events, and to hide threads and locks as much as possible.  We think we have succeeded.</p>
 <h2 id="memory-management">Memory Management</h2>
 <p>The McLaren Synth Kit is designed to take full advantage of ARC (Automatic Reference Counting) for memory reclamation.  A synthesizer with polyphony is usually rendering many different sounds at once.  Each sound has a starting event (its "attack") and eventually its "decay" and "release."  It's convenient to think of sounds as being allocated and deallocated.  While they are allocated, they are rendered to produce a sound.</p>
-<p>With the Synth Kit, a sound unit (called a "Voice") is be dynamically allocated and configured and then is handed to the audio thread for rendering.  After the Voice is done playing, the audio thread marks it a reclaimable.  A different background thread periodically checks for reclaimable Voices and gives them back to ARC.  This puts the memory of the Voice back in the allocation pool.</p>
-<p>These details are handled by the Synth Kit.  When you're writing an audio program using the kit, you only need to allocated and configure voices.  Once you're done with a sound, Synth Kit takes care of cleaning up.</p>
+<p>With the Synth Kit, a sound unit (called a "Voice") is dynamically allocated and configured, and then is handed to the audio thread for rendering.  After the Voice is done playing, the audio thread marks it a reclaimable.  A different background thread periodically checks for reclaimable Voices and gives them back to ARC.  This puts the memory of the Voice back in the allocation pool.</p>
+<p>These details are handled by the Synth Kit.  When you're writing an audio program using the kit, you only need to allocate and configure voices.  Once you're done with a sound, Synth Kit takes care of cleaning up.</p>
 <h2 id="objective-c-is-c">Objective-C is C</h2>
 <p>Objective-C is strictly a superset of C.  This means that C structs and functions can be used directly in Objective-C programs.  ALSA makes use of opaque C pointers as well as C structs for defining events and messages.  These things are the "language" of ALSA.  The Mclaren Synth Kit exposes many of these details where it adds no value to abstract them.</p>
 <p>Objective-C objects can be referenced as C structs.  This capability can lead to dangerous programming territory, but when used carefully it is very powerful.  In the Mclaren Synth Kit, we take advantage of the memory management and property capabilities of Objective-C objects, but we can (safely) pass references to these structs to low-level C functions.  C functions can access Objective-C instance variables directly, because the memory layout is known by both C and Objective-C.</p>
@@ -303,11 +293,11 @@
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
         <script>
-            var base_url = ".",
+            var base_url = "..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="js/base.js" defer></script>
-        <script src="search/main.js" defer></script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -375,8 +365,3 @@
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.1.2
-Build Date UTC : 2021-01-16 17:34:15.499754+00:00
--->

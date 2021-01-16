@@ -20,7 +20,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/console.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/objc.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'G-L0L8TCDS1C', 'mclarenlabs.github.io');
+            ga('send', 'pageview');
+        </script> 
     </head>
 
     <body>
@@ -181,15 +190,13 @@ int main(int argc, char *argv[], char **env)
 </code></pre>
 <p>This program is available in the <a href="../examples-setup">../examples-setup</a> directory along with a Makefile.</p>
 <h2 id="install-vscode">Install VSCode</h2>
-<p>VSCode (or just <code>code</code> as it is known <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a> has good support for Obj-C out of the box.  But it is when it is combined with <code>clang</code> and <code>clangd</code> it really shines!  With <code>clangd</code>, the compiler is run continuously against your code changes.  You get context-aware completions and the ability to locate functions and variables across files in your workspace.</p>
+<p>VSCode (or just <code>code</code> as it is known <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a>) has good support for Obj-C out of the box.  But it is when it is combined with <code>clang</code> and <code>clangd</code> that it really shines!  With <code>clangd</code>, the compiler is run continuously against your code changes.  You get context-aware completions and the ability to locate functions and variables across files in your workspace.</p>
 <p>To do this well, there is a little bit of configuration that needs to happen in the project to tell the background-compiler how to run.  But we'll describe all of that here a little later.</p>
 <p>But first: install <code>code</code> by downloading from the site.</p>
 <h3 id="avoid-the-snap-version-of-vscode">Avoid the SNAP version of VSCode!</h3>
 <p>On Ubuntu, a Snap is a self-contained installation unit that contains a program and all of its dependencies.  Programs packaged as "snaps" run in their own container, and are granted only the privileges they need to run.  For editing and compiling files, VSCode has enough privileges to perform these tasks.</p>
 <p>For audio development on Linux using VSCode, there is a bit of a problem.  The Snap version of VSCode does not have access to the ALSA audio system.  As a result, it is not possible to run your audio test programs as a sub-process of VSCode.  That means you can't test your code in the terminal inside of VSCode.</p>
 <p>The solution is simple: don't install the Snap version of VSCode.  Instead, download the <code>.deb</code> or <code>.rpm</code> or <code>.tar.gz</code> version.</p>
-<h3 id="open-up-this-workspace">Open up this Workspace</h3>
-<p>VSCode keeps track of a project with certain files.   In the top level of this project, there is a file called <code>mcsynkit.code-workspace</code>.  This defines the files of the workspace.  Select this file to open our project.</p>
 <h3 id="add-the-clangd-extension">Add the CLANGD extension</h3>
 <p>Open up the "Extensions" panel and find the <code>clangd</code> extension and install it.  This will add not only the mode, but the subprocess it needs.</p>
 <p><img alt="setup-pics/vscode-extensions-clangd.png" src="../setup-pics/vscode-extensions-clangd.png" /></p>
