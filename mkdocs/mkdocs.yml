@@ -1,5 +1,5 @@
 site_name: McLaren Synth Kit
-google_analytics: ['G-L0L8TCDS1C', 'mclarenlabs.github.io']
+google_analytics: ['UA-117359699-2', 'mclarenlabs.github.io']
 nav:
   - Introduction: 'index.md'
   - GNUstep and VSCode: 'setup.md'
