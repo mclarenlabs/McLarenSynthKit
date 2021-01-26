@@ -1,4 +1,8 @@
 site_name: McLaren Synth Kit
+site_description: Documentation from the McLaren Synth Kit Objective-C audio construction kit
+site_author: McLaren Labs of San Francisco
+repo_url: https://github.com/mclarenlabs/McLarenSynthKit/
+edit_uri: ""
 google_analytics: ['UA-117359699-2', 'mclarenlabs.github.io']
 nav:
   - Introduction: 'index.md'

@@ -1,13 +1,19 @@
-# Introduction to the Mclaren Synth Kit
+# Introduction to the McLaren Synth Kit
 
 The McLaren Synth Kit aims to bring audio programming to Objective-C on Linux.  It consists of two parts.
 
 1. Alsa Sound Kit (ASK) - Obj-C wrappers around Alsa sound and MIDI devices
-2. Mclaren Synth Kit (MSK) - a more abstract sound "context" and synthesizer construction operators like oscillators, envelopes and effects.
+2. McLaren Synth Kit (MSK) - a more abstract sound "context" and synthesizer construction operators like oscillators, envelopes and effects.
 
 These tool kits are distributed as header files and static libraries compiled for specific compiler and runtime combinations.
 
 FYI: These are the same libraries McLaren Labs uses to construct the synthesizers that are available for free download at [https://mclarenlabs.com](https://mclarenlabs.com).
+
+## Project Home
+
+The documentation you are reading here is from the `/mkdocs` directory of the McLaren Synth Kit repository on github.
+
+* [https://github.com/mclarenlabs/McLarenSynthKit](https://github.com/mclarenlabs/McLarenSynthKit)
 
 ## Background
 
@@ -31,16 +37,16 @@ One of the design goals of the McLaren Synth Kit it to elevate audio programming
 
 The McLaren Synth Kit is designed to take full advantage of ARC (Automatic Reference Counting) for memory reclamation.  A synthesizer with polyphony is usually rendering many different sounds at once.  Each sound has a starting event (its "attack") and eventually its "decay" and "release."  It's convenient to think of sounds as being allocated and deallocated.  While they are allocated, they are rendered to produce a sound.
  
-With the Synth Kit, a sound unit (called a "Voice") is be dynamically allocated and configured and then is handed to the audio thread for rendering.  After the Voice is done playing, the audio thread marks it a reclaimable.  A different background thread periodically checks for reclaimable Voices and gives them back to ARC.  This puts the memory of the Voice back in the allocation pool.
+With the Synth Kit, a sound unit (called a "Voice") is dynamically allocated and configured, and then is handed to the audio thread for rendering.  After the Voice is done playing, the audio thread marks it a reclaimable.  A different background thread periodically checks for reclaimable Voices and gives them back to ARC.  This puts the memory of the Voice back in the allocation pool.
 
-These details are handled by the Synth Kit.  When you're writing an audio program using the kit, you only need to allocated and configure voices.  Once you're done with a sound, Synth Kit takes care of cleaning up.
+These details are handled by the Synth Kit.  When you're writing an audio program using the kit, you only need to allocate and configure voices.  Once you're done with a sound, Synth Kit takes care of cleaning up.
 
 
 ## Objective-C is C
 
-Objective-C is strictly a superset of C.  This means that C structs and functions can be used directly in Objective-C programs.  ALSA makes use of opaque C pointers as well as C structs for defining events and messages.  These things are the "language" of ALSA.  The Mclaren Synth Kit exposes many of these details where it adds no value to abstract them.
+Objective-C is strictly a superset of C.  This means that C structs and functions can be used directly in Objective-C programs.  ALSA makes use of opaque C pointers as well as C structs for defining events and messages.  These things are the "language" of ALSA.  The McLaren Synth Kit exposes many of these details where it adds no value to abstract them.
 
-Objective-C objects can be referenced as C structs.  This capability can lead to dangerous programming territory, but when used carefully it is very powerful.  In the Mclaren Synth Kit, we take advantage of the memory management and property capabilities of Objective-C objects, but we can (safely) pass references to these structs to low-level C functions.  C functions can access Objective-C instance variables directly, because the memory layout is known by both C and Objective-C.
+Objective-C objects can be referenced as C structs.  This capability can lead to dangerous programming territory, but when used carefully it is very powerful.  In the McLaren Synth Kit, we take advantage of the memory management and property capabilities of Objective-C objects, but we can (safely) pass references to these structs to low-level C functions.  C functions can access Objective-C instance variables directly, because the memory layout is known by both C and Objective-C.
 
 ## Error Handling
 
@@ -57,11 +63,11 @@ The major components of the Alsa Sound Kit are described below.
 * ASKSeq - open an ALSA MIDI Sequencer device and play or capture MIDI events
 * ASKSeqList - list the ALSA MIDI devices in your system
 
-The Mclaren Synth Kit (MSK) further abstracts audio devices into an object called a "Audio Context."  An Audio Context can render audio pipelines that are described as a connected graph of audio elements, each of which is called a "Voice".  A Voice can be a simple oscillator, an oscillator controlled by an envelope, or a more complex graph of multiple oscillators, envelopes and filters.  A Voice can play for ever, it can stop after a specified time or it can be sent a `noteOff` message.
+The McLaren Synth Kit (MSK) further abstracts audio devices into an object called a "Audio Context."  An Audio Context can render audio pipelines that are described as a connected graph of audio elements, each of which is called a "Voice".  A Voice can be a simple oscillator, an oscillator controlled by an envelope, or a more complex graph of multiple oscillators, envelopes and filters.  A Voice can play for ever, it can stop after a specified time or it can be sent a `noteOff` message.
 
 Once created, a Voice is handed over to a Context for rendering.  The Context manages the rendering and mixing of multiple Voices.  In a typical use, a Voice is allocated for each MIDI note sounding.  When a Voice is done playing, the Context removes the Voice and arranges for the reclamation of its memory.
 
-The major components of the Mclaren Synth Kit are described below.
+The major components of the McLaren Synth Kit are described below.
 
 * MSKContext - an audio context for rendering Voices or capturing sounds into a Voice
 * MSKLinEnvelope, MSKExpEnvelope - linear and exponential envelope generators
@@ -177,9 +183,9 @@ int main(int argc, char *argv[]) {
 
 ## Summary
 
-This chapter gives a brief introduction to the design goals of the Mclaren Synth Kit.  The kit uses the concurrency and memory management features of modern Objective-C to provide a comfortable environment for audio programming on Linux.  An example program showed how to play a synthesized sound consisting of an envelope generator and an oscillator playing a middle-C.  Hopefully this was intriguing enough that you want to find out more.
+This chapter gives a brief introduction to the design goals of the McLaren Synth Kit.  The kit uses the concurrency and memory management features of modern Objective-C to provide a comfortable environment for audio programming on Linux.  An example program showed how to play a synthesized sound consisting of an envelope generator and an oscillator playing a middle-C.  Hopefully this was intriguing enough that you want to find out more.
 
-We didn't explain the details of how audio objects are defined and configured using the Mclaren Synth Kit, and we didn't explain the rules for how "Voices" (the audio objects of the MSK) can be combined to create more complex sounds.  We also didn't cover how to find audio devices on your computer (i.e. - external USB sound cards) and how to use them.  All of these will be covered in later chapters.
+We didn't explain the details of how audio objects are defined and configured using the McLaren Synth Kit, and we didn't explain the rules for how "Voices" (the audio objects of the MSK) can be combined to create more complex sounds.  We also didn't cover how to find audio devices on your computer (i.e. - external USB sound cards) and how to use them.  All of these will be covered in later chapters.
 
 
 
