@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        
+        <meta name="author" content="McLaren Labs of San Francisco">
         
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>Introduction to the Mclaren Synth Kit - McLaren Synth Kit</title>
@@ -80,6 +80,9 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/mclarenlabs/McLarenSynthKit/" class="nav-link"><i class="fa fa-github"></i> GitHub</a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -100,6 +103,10 @@
             
             <li class="nav-item" data-level="1"><a href="#introduction-to-the-mclaren-synth-kit" class="nav-link">Introduction to the Mclaren Synth Kit</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#project-home" class="nav-link">Project Home</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-level="2"><a href="#background" class="nav-link">Background</a>
               <ul class="nav flex-column">
               </ul>
@@ -147,6 +154,11 @@
 </ol>
 <p>These tool kits are distributed as header files and static libraries compiled for specific compiler and runtime combinations.</p>
 <p>FYI: These are the same libraries McLaren Labs uses to construct the synthesizers that are available for free download at <a href="https://mclarenlabs.com">https://mclarenlabs.com</a>.</p>
+<h2 id="project-home">Project Home</h2>
+<p>The documentation you are reading here is from the <code>/mkdocs</code> directory of the McLaren Synth Kit repository on github.</p>
+<ul>
+<li>https://github.com/mclarenlabs/McLarenSynthKit</li>
+</ul>
 <h2 id="background">Background</h2>
 <p>This project is partially inspired by experiences with audio systems on IOS, OSX and Webkit and a NeXT project called <a href="https://github.com/leighsmith/MusicKit">MusicKit</a>.  We had in mind building a networked synthesizer using RTP-MIDI in an embedded Raspberry Pi application.  We really liked the features of modern Objective-C and thought it could provide a nice experience for audio programming.</p>
 <p>We purposely chose to focus on Linux and its ALSA interface.  We wanted to avoid the layers of abstraction provided by the PortAudio project or JUCE. We also wanted to avoid dependence on a sound server like Pulse or JACK simply to reduce dependencies.  We wanted to keep the toolkit lean and easy to set up.</p>
