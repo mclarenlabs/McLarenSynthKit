@@ -14,3 +14,7 @@ scaleplayer: scaleplayer.m
 # tiny example
 tiny: tiny.m
 	clang -mtune=cortex-a53 -O3 -g -o tiny -fblocks -fobjc-arc -x objective-c -DOS_OBJECT_USE_OBJC=0 -I$(INCPATH) $(OBJCFLAGS) tiny.m $(OBJCLIBS) -L$(LIBPATH) -l:libmclarensynthkit.a -l:libalsasoundkit.a -ldispatch -lasound
+
+# metronome example
+metronome: metronome.m
+	clang -O3 -g -o metronome -fblocks -fobjc-arc -x objective-c -DOS_OBJECT_USE_OBJC=0 -I$(INCPATH) $(OBJCFLAGS) metronome.m $(OBJCLIBS) -L$(LIBPATH) -l:libmclarensynthkit.a -l:libalsasoundkit.a -ldispatch -lasound

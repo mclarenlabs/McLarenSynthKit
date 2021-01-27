@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AlsaSoundKit/AlsaSoundKit.h"
-#import "MclarenSynthKit/MclarenSynthKit.h"
+#import "McLarenSynthKit/McLarenSynthKit.h"
 
 int main(int argc, char *argv[]) {
 
