@@ -2,7 +2,7 @@
  *
  * ASKSeqEvent - ALSA Sequencer Events (alsa/seq_event.h)
  * 
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 

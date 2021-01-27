@@ -4,14 +4,14 @@
  * Use it as a scratchpad of properties backed with
  * variables that can be saved and restored
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 
 #import <Foundation/Foundation.h>
 
-#import "MclarenSynthKit/model/MSKModelBase.h"
-#import "MclarenSynthKit/model/MSKModelProtocol.h"
+#import "McLarenSynthKit/model/MSKModelBase.h"
+#import "McLarenSynthKit/model/MSKModelProtocol.h"
 
 @interface MSKValuesModel : MSKModelBase<MSKModelProtocol> {
   @public

@@ -3,11 +3,11 @@
  * An Envelope Fanout re-sends the envelope protocol methods (noteOff, noteAbort
  * and noteReset) to a collection of envelopes. 
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 
-#import "MclarenSynthKit/MSKContext.h"
+#import "McLarenSynthKit/MSKContext.h"
 
 @interface MSKEnvelopeFanout : MSKContextVoice<MSKContextEnvelope>
 

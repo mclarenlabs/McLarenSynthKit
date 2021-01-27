@@ -2,12 +2,12 @@
  *
  * An extension to GeneralOscillator: a phase distortion input is added
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 
-#import "MclarenSynthKit/MSKContext.h"
-#import "MclarenSynthKit/voice/MSKGeneralOscillator.h"
+#import "McLarenSynthKit/MSKContext.h"
+#import "McLarenSynthKit/voice/MSKGeneralOscillator.h"
 
 @interface MSKPhaseDistortionOscillator : MSKGeneralOscillator {
   // oscillator properties

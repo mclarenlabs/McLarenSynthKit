@@ -13,12 +13,12 @@
  *
  * The code here uses units of seconds.
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 
-#import "MclarenSynthKit/MSKContext.h"
-#import "MclarenSynthKit/model/MSKEnvelopeModel.h"
+#import "McLarenSynthKit/MSKContext.h"
+#import "McLarenSynthKit/model/MSKEnvelopeModel.h"
 
 @interface MSKExpEnvelope : MSKContextVoice<MSKContextEnvelope>
 

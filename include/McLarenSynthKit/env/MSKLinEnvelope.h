@@ -4,12 +4,12 @@
  *
  * This envelope linearly transitions from point to point.
  * 
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 
-#import "MclarenSynthKit/MSKContext.h"
-#import "MclarenSynthKit/model/MSKEnvelopeModel.h"
+#import "McLarenSynthKit/MSKContext.h"
+#import "McLarenSynthKit/model/MSKEnvelopeModel.h"
 
 @interface MSKLinEnvelope : MSKContextVoice<MSKContextEnvelope>
 

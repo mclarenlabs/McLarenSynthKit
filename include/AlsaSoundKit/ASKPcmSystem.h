@@ -17,7 +17,7 @@
  *
  * Wrap a SND CTL Card Info
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  */
 
 @interface ASKCtlCardInfo : NSObject 

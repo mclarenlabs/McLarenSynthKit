@@ -2,7 +2,7 @@
  *
  * Error codes and Error objects for McLaren Synth Kit
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  */
 
 #import <Foundation/Foundation.h>

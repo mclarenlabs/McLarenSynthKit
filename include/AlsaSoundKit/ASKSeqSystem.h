@@ -2,7 +2,7 @@
  *
  * Objects to hold information about the sequencer clients and ports in the system.
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 

@@ -6,11 +6,11 @@
  *
  * Note: Modified to take Fc in units of Hz.
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 
-#import "MclarenSynthKit/MSKContext.h"
+#import "McLarenSynthKit/MSKContext.h"
 
 enum {
     MSK_BIQUAD_TYPE_LOWPASS = 0,

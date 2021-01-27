@@ -2,7 +2,7 @@
  *
  * Wrap an Alsa sequencer
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  */
 
 #include <alsa/asoundlib.h>

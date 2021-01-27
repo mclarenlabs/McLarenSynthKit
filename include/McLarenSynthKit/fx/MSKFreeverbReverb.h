@@ -8,14 +8,14 @@
  *  http://www.dreampoint.co.uk
  *  This code is public domain
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  */
 
-#import "MclarenSynthKit/MSKContext.h"
+#import "McLarenSynthKit/MSKContext.h"
 // #import "FVTuning.h"
 // #import "FVComb.h"
 // #import "FVAllpass.h"
-#import "MclarenSynthKit/model/MSKReverbModel.h"
+#import "McLarenSynthKit/model/MSKReverbModel.h"
 
 @interface MSKFreeverbReverb : MSKContextVoice
 - (id) initWithCtx:(MSKContext*)c;

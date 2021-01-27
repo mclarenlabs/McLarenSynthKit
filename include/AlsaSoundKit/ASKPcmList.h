@@ -5,7 +5,7 @@
  * each of these, it implements logic for displaying the ASKPcmListItem to a
  * user, and for selecting a PCMListItem as an input device.
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 

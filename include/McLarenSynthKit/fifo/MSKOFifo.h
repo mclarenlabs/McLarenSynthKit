@@ -4,12 +4,12 @@
  * Thread to the Audio Context dispatch queue where the messages are
  * relayed as callbacks.
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 
 #import <Foundation/Foundation.h>
-#import "MclarenSynthKit/MSKContext.h"
+#import "McLarenSynthKit/MSKContext.h"
 
 /*
  * The types of messages

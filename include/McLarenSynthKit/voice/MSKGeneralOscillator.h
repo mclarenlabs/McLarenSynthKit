@@ -4,12 +4,12 @@
  *
  * This oscillator may be continuously updated through its model.
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 
-#import "MclarenSynthKit/MSKContext.h"
-#import "MclarenSynthKit/model/MSKOscillatorModel.h"
+#import "McLarenSynthKit/MSKContext.h"
+#import "McLarenSynthKit/model/MSKOscillatorModel.h"
 
 @interface MSKGeneralOscillator : MSKContextVoice {
 

@@ -1,7 +1,7 @@
 /**
  * Umbrella include for Alsa Sound Kit
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 

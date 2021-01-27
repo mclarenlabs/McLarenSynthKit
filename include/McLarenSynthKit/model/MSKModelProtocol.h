@@ -2,7 +2,7 @@
  *
  * The save/restore protocol that models must implement.
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 

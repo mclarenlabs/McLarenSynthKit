@@ -1,11 +1,11 @@
 /*
  * A Voice renders a sound to its context
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  */
 
-#import "MclarenSynthKit/MSKContext.h"
-#import "MclarenSynthKit/model/MSKOscillatorModel.h"
+#import "McLarenSynthKit/MSKContext.h"
+#import "McLarenSynthKit/model/MSKOscillatorModel.h"
 
 /*
  * an MSKSinFixedOscillator renders sound based on its attached models and its input buffers.

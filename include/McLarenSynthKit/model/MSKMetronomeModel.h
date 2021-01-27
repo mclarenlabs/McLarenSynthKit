@@ -2,14 +2,14 @@
  *
  * A model managing the settings for a Metronome
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 
 #import <Foundation/Foundation.h>
 
-#import "MclarenSynthKit/model/MSKModelBase.h"
-#import "MclarenSynthKit/model/MSKModelProtocol.h"
+#import "McLarenSynthKit/model/MSKModelBase.h"
+#import "McLarenSynthKit/model/MSKModelProtocol.h"
 
 /*
  * This object is used to set/get timesig values from the model

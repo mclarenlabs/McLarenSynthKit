@@ -3,13 +3,13 @@
  * A model manages settings for oscillators.
  * This model will contain a superset of all possible oscillator parameters.
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  */
 
 #import <Foundation/Foundation.h>
 
-#import "MclarenSynthKit/model/MSKModelBase.h"
-#import "MclarenSynthKit/model/MSKModelProtocol.h"
+#import "McLarenSynthKit/model/MSKModelBase.h"
+#import "McLarenSynthKit/model/MSKModelProtocol.h"
 
 typedef enum msk_oscillator_type {
   MSK_OSCILLATOR_TYPE_SIN,

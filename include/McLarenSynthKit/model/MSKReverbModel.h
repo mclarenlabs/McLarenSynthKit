@@ -2,13 +2,13 @@
  *
  * A model manages settings for reverb units.
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 
 #import <Foundation/Foundation.h>
-#import "MclarenSynthKit/model/MSKModelBase.h"
-#import "MclarenSynthKit/model/MSKModelProtocol.h"
+#import "McLarenSynthKit/model/MSKModelBase.h"
+#import "McLarenSynthKit/model/MSKModelProtocol.h"
 
 @interface MSKReverbModel : MSKModelBase<MSKModelProtocol> {
   @public

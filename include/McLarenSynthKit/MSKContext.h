@@ -3,7 +3,7 @@
  * An audio context keeps the total sample count, current time, and
  * parameters related to the sample size.
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  */
 
 #import <Foundation/Foundation.h>

@@ -13,13 +13,13 @@
  * A Metronome is configured via its model, and it observes the model
  * using KVO for realtime parameter changes.
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  * Jan 2019
  */
 
 #import "AlsaSoundKit/ASKSeq.h"
-#import "MclarenSynthKit/model/MSKMetronomeModel.h"
+#import "McLarenSynthKit/model/MSKMetronomeModel.h"
 
 typedef void (^MSKMetronomeListener)(int beat, int measure);
 typedef void (^MSKMetronomeClockListener)(int clock, int beat, int measure); // 0..23

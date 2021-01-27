@@ -6,12 +6,12 @@
  * out[i] = SIN(\phi + 3.5 * M * pi[i] * SIN(\psi))
  *  where \psi = \phi * (HARMONIC/SUBHARMONIC)
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  */
 
 #import <Foundation/Foundation.h>
-#import "MclarenSynthKit/MSKContext.h"
-#import "MclarenSynthKit/model/MSKOscillatorModel.h"
+#import "McLarenSynthKit/MSKContext.h"
+#import "McLarenSynthKit/model/MSKOscillatorModel.h"
 
 @interface MSKFMPhaseEnvelopeOscillator : MSKContextVoice
 

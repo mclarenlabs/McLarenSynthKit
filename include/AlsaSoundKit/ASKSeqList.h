@@ -3,7 +3,7 @@
  * This class exists to query the Alsa sound system for SEQ devices,
  * and provide them as a ASNDPortInfo array called 'portinfos'.
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 

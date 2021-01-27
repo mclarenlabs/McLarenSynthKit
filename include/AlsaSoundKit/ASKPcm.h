@@ -2,7 +2,7 @@
  *
  * Manage an Alsa PCM device.
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  */
 
 #include <alsa/asoundlib.h>

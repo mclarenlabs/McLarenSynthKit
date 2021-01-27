@@ -6,7 +6,7 @@
  * When a setter modifies the value of a property, it should set the 'modified' flag.
  * When a Model saves or restores itself it should clear the 'modified' flag.
  *
- * copyright (c) McLaren Labs 2021
+ * $copyright$
  *
  */
 
